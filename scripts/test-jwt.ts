@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { createToken, verifyToken, JWTPayload } from "../lib/auth/jwt";
 
 function main() {
