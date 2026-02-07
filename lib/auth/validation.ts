@@ -30,10 +30,11 @@ export function isValidPassword(password: string): boolean {
 }
 
 export function isValidName(name: string | undefined): boolean {
-  if (name === undefined) return true;
+  // If name is not provided or empty, it's valid (optional field)
+  if (!name || name.trim() === "") return true;
 
-  const length = name.trim().length;
-  return length >= 1 && length <= 100;
+  // If provided, must be 1-100 characters (already >= 1 from check above)
+  return name.trim().length <= 100;
 }
 
 export function validateRegistration(data: RegistrationData): ValidationResult {
