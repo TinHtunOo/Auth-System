@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { hashPassword } from "@/lib/auth/password";
 import { createToken } from "@/lib/auth/jwt";
 import { validateRegistration } from "@/lib/auth/validation";
+import { createVerificationToken } from "@/lib/auth/tokens";
+import { sendVerificationEmail } from "@/lib/email/mailer";
 
 export async function POST(request: Request) {
   try {
@@ -39,6 +41,17 @@ export async function POST(request: Request) {
     const user = await prisma.user.create({
       data: { email, password: hashedPassword, name },
     });
+
+    // 6. Create verification token and send email
+    try {
+      const verificationToken = await createVerificationToken(user.id);
+      await sendVerificationEmail(email, verificationToken);
+      console.log("✅ Verification email sent to:", email);
+    } catch (emailError) {
+      // Don't fail registration if email fails
+      // Just log the error
+      console.error("❌ Failed to send verification email:", emailError);
+    }
 
     // 6. Create JWT token
     // Use createToken({ userId: user.id, email: user.email })
