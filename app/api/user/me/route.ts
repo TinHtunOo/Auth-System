@@ -19,7 +19,7 @@ export async function GET() {
       email: true,
       name: true,
       createdAt: true,
-      // Don't select password!
+      emailVerified: true,
     },
   });
 
