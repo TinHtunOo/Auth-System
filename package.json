@@ -13,7 +13,8 @@
     "test:validation": "tsx scripts/test-validation.js",
     "test:email": "tsx scripts/test-email.ts",
     "test:tokens": "tsx scripts/test-tokens.ts",
-    "test:register-email": "tsx scripts/test-register-email.ts"
+    "test:register-email": "tsx scripts/test-register-email.ts",
+    "test:password-reset": "tsx scripts/test-password-reset.ts"
   },
   "dependencies": {
     "@prisma/client": "5.22.0",
