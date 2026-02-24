@@ -26,7 +26,11 @@ export async function POST(request: Request) {
 
     if (!user) {
       return NextResponse.json(
-        { error: "Invalid email or password" },
+        {
+          error: "Invalid email or password",
+          suggestion:
+            'Double-check your credentials or use "Forgot password" to reset.',
+        },
         { status: 401 },
       );
     }
@@ -35,7 +39,11 @@ export async function POST(request: Request) {
     const isPasswordValid = await verifyPassword(password, user.password);
     if (!isPasswordValid) {
       return NextResponse.json(
-        { error: "Invalid email or password" },
+        {
+          error: "Invalid email or password",
+          suggestion:
+            'If you forgot your password, click "Forgot password" below.',
+        },
         { status: 401 },
       );
     }

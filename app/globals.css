@@ -1,26 +1,177 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* =========================
+   Theme Tokens (Tailwind v4)
+========================= */
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #171717;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
+/* Dark mode via media query */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  @theme {
+    --color-background: #0a0a0a;
+    --color-foreground: #ededed;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* =========================
+   Base Styles
+========================= */
+@layer base {
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  @media (hover: none) and (pointer: coarse) {
+    button,
+    a,
+    input,
+    textarea,
+    select {
+      min-height: 44px; /* iOS recommended minimum */
+    }
+
+    /* Prevent zoom on input focus on mobile */
+    input,
+    textarea,
+    select {
+      font-size: 16px;
+    }
+  }
+}
+
+/* =========================
+   Utilities
+========================= */
+@layer utilities {
+  /* Fade In */
+  .animate-fadeIn {
+    animation: fade-in 0.5s ease-in forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      translate: 0 10px;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  /* Button hover */
+  .btn-hover {
+    @apply transition duration-200 ease-in-out;
+  }
+
+  .btn-hover:hover:not(:disabled) {
+    @apply scale-105 shadow-lg;
+  }
+
+  .btn-hover:active:not(:disabled) {
+    @apply scale-95;
+  }
+
+  /* Input focus */
+  .input-focus {
+    @apply transition duration-200;
+  }
+
+  .input-focus:focus {
+    @apply ring-2 ring-blue-500 ring-offset-2 scale-[1.01];
+  }
+
+  /* Shake animation */
+  .shake {
+    animation: shake 0.5s;
+  }
+
+  @keyframes shake {
+    0%,
+    100% {
+      translate: 0;
+    }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+      translate: -5px 0;
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+      translate: 5px 0;
+    }
+  }
+
+  /* Success bounce */
+  .success-bounce {
+    animation: success-bounce 0.6s ease-in-out;
+  }
+
+  @keyframes success-bounce {
+    0%,
+    100% {
+      scale: 1;
+    }
+    50% {
+      scale: 1.2;
+    }
+  }
+
+  /* Card hover */
+  .card-hover {
+    @apply transition duration-300 ease-in-out;
+  }
+
+  .card-hover:hover {
+    @apply -translate-y-1 shadow-xl;
+  }
+
+  .touch-spacing {
+    @apply p-4 sm:p-6;
+  }
+
+  /* Responsive text */
+  .responsive-text {
+    @apply text-sm sm:text-base;
+  }
+
+  /* Remove tap highlight on mobile */
+  .no-tap-highlight {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @keyframes blob {
+    0%,
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+  }
+
+  .animate-blob {
+    animation: blob 7s infinite;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
 }
