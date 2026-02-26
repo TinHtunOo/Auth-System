@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { PageTransition } from "@/components/ui/page-transition";
 
 export default function HomePage() {
   return (
