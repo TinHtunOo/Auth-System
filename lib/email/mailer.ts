@@ -22,6 +22,21 @@ async function createTestTransporter() {
   return { transporter, testAccount };
 }
 
+// import { Resend } from "resend";
+
+// const resend = new Resend(process.env.RESEND_API_KEY);
+
+// export async function sendVerificationEmail(to: string, token: string) {
+//   const verificationUrl = `${process.env.NEXT_PUBLIC_APP_URL}/verify-email?token=${token}`;
+
+//   await resend.emails.send({
+//     from: "AuthSystem <onboarding@yourdomain.com>",
+//     to,
+//     subject: "Verify your email address",
+//     html: `<!-- your email template -->`,
+//   });
+// }
+
 /**
  * Sends a verification email
  * @param to - Recipient email address
@@ -46,8 +61,8 @@ export async function sendVerificationEmail(
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2>Verify your email address</h2>
         <p>Thanks for signing up! Please verify your email by clicking the button below:</p>
-        
-        <a 
+
+        <a
           href="${verificationUrl}"
           style="
             display: inline-block;
@@ -61,10 +76,10 @@ export async function sendVerificationEmail(
         >
           Verify Email
         </a>
-        
+
         <p>Or copy this link:</p>
         <p style="color: #6b7280; word-break: break-all;">${verificationUrl}</p>
-        
+
         <p style="color: #6b7280; font-size: 14px;">
           This link expires in 24 hours.
           If you didn't create an account, you can safely ignore this email.

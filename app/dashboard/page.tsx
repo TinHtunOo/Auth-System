@@ -160,7 +160,13 @@ export default function DashboardPage() {
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
               Dashboard
             </h1>
-            <div className="flex gap-3 w-full sm:w-auto">
+            <div className="flex gap-3 w-full sm:w-auto flex-wrap">
+              <Link
+                href="/security"
+                className="flex-1 sm:flex-initial px-4 py-2 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors text-center btn-hover font-medium"
+              >
+                🛡️ Security
+              </Link>
               <Link
                 href="/settings"
                 className="flex-1 sm:flex-initial px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors text-center btn-hover"
@@ -170,7 +176,7 @@ export default function DashboardPage() {
               <button
                 onClick={handleLogout}
                 disabled={isLoggingOut}
-                className="w-full sm:w-auto px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:bg-gray-400 transition-colors flex items-center justify-center gap-2 btn-hover"
+                className="flex-1 sm:flex-initial px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:bg-gray-400 transition-colors flex items-center justify-center gap-2 btn-hover"
               >
                 {isLoggingOut && <Spinner className="w-4 h-4" />}
                 {isLoggingOut ? "Logging out..." : "Logout"}
